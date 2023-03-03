@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import axios HTTP library
-import axios from 'axios';
 
 // class component
 class Frame extends React.Component {
