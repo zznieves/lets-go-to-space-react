@@ -24,7 +24,7 @@ class App extends React.Component {
   // make a GET request to the API
   componentDidMount() {
 
-    axios.get(process.env.REACT_APP_API_KEY)
+    axios.get('https://api.nasa.gov/planetary/apod?api_key=gUhCNHU8oJ1PnoQRuIl8ImQI5BlmrhN9XlYjrjE5')
     .then((response) => {
 
       // if we are successful and receive a response, upstate the state
