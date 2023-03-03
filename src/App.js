@@ -24,7 +24,7 @@ class App extends React.Component {
   // make a GET request to the API
   componentDidMount() {
 
-    axios.get('')
+    axios.get(process.env.REACT_APP_API_KEY)
     .then((response) => {
 
       // if we are successful and receive a response, upstate the state
@@ -34,7 +34,6 @@ class App extends React.Component {
     })
     .catch((error) => {
       
-      console.log(error);
       // if an error occurred, place it in the state
       this.setState({
         errorMsg: 'Error retrieving data'
