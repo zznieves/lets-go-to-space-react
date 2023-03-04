@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './Components/Header';
+import Input from './Components/Input';
 import Frame from './Components/Frame';
 import Description from './Components/Description';
 
@@ -16,15 +17,28 @@ class App extends React.Component {
 
     // initialize state
     this.state = {
+      date: '',
       data: [],
       errorMsg: ''
     };
+
+    // bind 'this' keyword to class methods
+    this.getData = this.getData.bind(this);
   }
 
-  // make a GET request to the API
-  componentDidMount() {
 
-    axios.get('https://api.nasa.gov/planetary/apod?api_key=gUhCNHU8oJ1PnoQRuIl8ImQI5BlmrhN9XlYjrjE5')
+  // eventHandler for onClick event: pass to Child component
+  getData() {
+
+    // get date from inputBox
+    const date = document.getElementById('date').value;
+
+    // test code: log input to the console
+    console.log(date);
+    console.log(typeof date);
+
+    // make a GET request to the API
+    axios.get('https://api.nasa.gov/planetary/apod?api_key=gUhCNHU8oJ1PnoQRuIl8ImQI5BlmrhN9XlYjrjE5&date=' + date)
     .then((response) => {
 
       // if we are successful and receive a response, upstate the state
@@ -54,6 +68,7 @@ class App extends React.Component {
     return (
         <div className='App'>
           <Header id='header' title="Let's Go To Space" />
+          <Input onClick={this.getData}/>
           <Frame id='picframe' data={data} />
           <Description info={data.explanation} />
         </div>
@@ -62,7 +77,12 @@ class App extends React.Component {
     // if an error occurred, notify the user
     return (
       <div className='App'>
-        <Description info={errorMsg} />
+        <div className='App'>
+          <Header id='header' title="Let's Go To Space" />
+          <Input onClick={this.getData}/>
+          <Frame id='picframe' data={data} />
+          <Description info={errorMsg} />
+        </div>
       </div>
     );
   }
